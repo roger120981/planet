@@ -1,0 +1,163 @@
+<%= form_for @changeset, @action, [multipart: true], fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+     <p>Oops, something went wrong! Please check the errors below.</p>
+     <%= for {:base,v} <- @changeset.errors do %>
+      <p><%= v %></p>
+     <% end %>
+
+      <%# Works when changeset has master changes but fails otherwise %>
+      <%# for {:base,v} <- @changeset.changes.master.errors do %>
+        <p><%# v %></p>
+      <%# end %>
+
+    </div>
+  <% end %>
+  <fieldset data-hook="new_product">
+    <div class="form-group">
+      <%= label f, :name, "Name", class: "control-label" %> <span class="required">*</span>
+      <%= text_input f, :name, class: "form-control title", required: true %>
+      <%= error_tag f, :name %>
+    </div>
+    <%= if @changeset.data.id do %>
+    <div class="form-group">
+      <%= label f, :permalink, class: "control-label" %>
+      <%= text_input f, :permalink, class: "form-control" %>
+      <%= error_tag f, :permalink %>
+    </div>
+    <% end %>
+    <div data-hook="new_product_attrs" class="row">
+      <div data-hook="new_product_meta_description" class="col-xs-12 col-md-6">
+        <div class="form-group">
+          <%= label f, :meta_description, class: "control-label" %><span class="required">*</span>
+          <%= textarea f, :meta_description, class: "form-control", required: true %>
+          <%= error_tag f, :meta_description %>
+        </div>
+      </div>
+      <div data-hook="new_product_meta_keywords" class="col-xs-12 col-md-6">
+        <div class="form-group">
+          <%= label f, :meta_keywords, class: "control-label" %><span class="required">*</span>
+          <%= textarea f, :meta_keywords, class: "form-control", required: true %>
+          <%= error_tag f, :meta_keywords %>
+        </div>
+      </div>
+      <div data-hook="new_product_short_description" class="col-xs-12 col-md-6">
+        <div class="form-group">
+          <%= label f, :short_description, class: "control-label" %>
+          <%= textarea f, :short_description, class: "form-control", rows: 10 %>
+          <%= error_tag f, :short_description %>
+        </div>
+      </div>
+      <div data-hook="new_product_description" class="col-xs-12 col-md-6">
+        <div class="form-group">
+          <%= label f, :description, class: "control-label" %><span class="required">*</span>
+          <%= textarea f, :description, class: "form-control", rows: 10, required: true %>
+          <%= error_tag f, :description %>
+        </div>
+      </div>
+      <div data-hook="new_product_tags" class="col-xs-12 col-md-4">
+        <div class="form-group">
+          <%= label f, :tag_list, "Add Tags(separated by comma)", class: "control-label" %>
+          <%= text_input f, :tag_list, class: "autocomplete form-control"%>
+          <%= error_tag f, :tag_list %>
+        </div>
+      </div>
+
+    <%= inputs_for f, :master, [multipart: true], fn m -> %>
+      <div data-hook="new_product_master_price" class="col-xs-12 col-md-4">
+        <div class="form-group">
+          <%= label m, :cost_price, class: "control-label" %><span class="required">*</span>
+          <%= text_input m, :cost_price, class: "form-control", required: true %>
+          <%= error_tag m, :cost_price %>
+        </div>
+      </div>
+      <div data-hook="new_product_master_price" class="col-xs-12 col-md-4">
+        <div class="form-group">
+          <%= label m, :add_count,"Add Stock", class: "control-label" %>
+          <%= number_input m, :add_count, class: "form-control" %>
+          <%= if @changeset.data.id do %>
+            <span>Total:  <%= m.data.total_quantity %></span>
+            <span>Bought: <%= m.data.bought_quantity %></span>
+          <% end %>
+          <%= error_tag m, :add_count %>
+        </div>
+      </div>
+
+      <%= if @changeset.data.id do %>
+      <div data-hook="new_product_image" class="col-xs-12 col-md-6">
+          <div class="form-group">
+            <%= label m, :image, "Master image", class: "control-label" %>
+            <%= file_input m, :image, class: "form-control" %>
+            <%= if @product.master.image do %>
+              <%= tag(:img, src: ExcommerceWeb.VariantImage.url({@product.master.image, @product.master})) %>
+            <% end %>
+            <%= error_tag m, :image %>
+          </div>
+      </div>
+      <div data-hook="new_product_discontinue" class="col-xs-12 col-md-6">
+        <div class="form-group ">
+          <%= label m, :discontinue_on, class: "control-label" %><span class="required">*</span>
+          <%= text_input m, :discontinue_on, class: "datepicker form-control", required: true %>
+          <%= error_tag m, :discontinue_on %>
+        </div>
+      </div>
+      <% end %>
+    <% end %>
+    </div>
+
+    <div data-hook="new_product_attrs" class="row">
+      <div data-hook="new_product_option_type" class="col-xs-12 col-md-4">
+        <%= inputs_for f, :product_option_types, fn po -> %>
+        <div class="product_option_type">
+          <div class="form-group">
+            <%= label po, :option_type_id, class: "control-label" %>
+            <%= select po, :option_type_id, @get_option_types, class: "form-control" %>
+            <%= error_tag po, :option_type_id %>
+          </div>
+          <%= if po.data.id do %>
+          <div class="form-group">
+            <%= label po, :delete, "Delete?", class: "control-label" %>
+            <%= checkbox po, :delete %>
+          </div>
+          <% else %>
+          <%= link "Remove", to: "#", id: "delete_product_option_type" %>
+          <% end %>
+
+        </div>
+        <% end %>
+        <div><%= link_to_product_option_types_fields %></div>
+      </div>
+    </div>
+
+    <div data-hook="new_product_attrs" class="row">
+      <div data-hook="new_product_option_type" class="col-xs-12 col-md-4">
+        <%= inputs_for f, :product_categories, fn po -> %>
+        <div class="product_categories">
+          <div class="form-group">
+            <%= label po, :category_id, class: "control-label" %>
+            <%= select po, :category_id, @categories, class: "form-control" %>
+            <%= error_tag po, :category_id %>
+          </div>
+
+          <%= if po.data.id do %>
+          <div class="form-group">
+            <%= label po, :delete, "Delete?", class: "control-label" %>
+            <%= checkbox po, :delete %>
+          </div>
+          <% else %>
+          <%= link "Remove", to: "#", id: "delete_product_category" %>
+          <% end %>
+        </div>
+        <% end %>
+
+        <div><%= link_to_product_category_fields(@categories) %></div>
+      </div>
+    </div>
+
+    <div class="form-actions" data-hook="buttons">
+      <%= submit "Submit", class: "btn btn-success" %>
+      <span class="or"><%= gettext "or" %></span>
+      <%= general_link_to "Back", [to: admin_product_path(@conn, :index), class: "btn btn-danger", icon: "remove"] %>
+    </div>
+  </fieldset>
+<% end %>

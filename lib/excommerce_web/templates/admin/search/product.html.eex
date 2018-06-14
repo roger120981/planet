@@ -1,0 +1,18 @@
+<div class="filter-wrap row">
+  <div class="col-xs-12">
+    <div class="input-group index-filter-button">
+        <span class="input-group-btn">
+          <button class="btn btn-default js-show-index-filters" type="button">
+            <span class="icon icon-chevron-right"></span>
+            Filter
+          </button>
+        </span>
+
+        <%= form_for @search_changeset, @search_action, [method: :get, id: "quick-search"], fn f -> %>
+           <%= text_input f, :name, [id: "quick_search", class: "form-control js-quick-search", placeholder: "Search Products"] %>
+        <% end %>
+
+    </div>
+  </div>
+</div>
+<div class="table-active-filters js-filters"></div>

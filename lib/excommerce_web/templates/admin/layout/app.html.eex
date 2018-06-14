@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Tienda</title>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+	<meta name="csrf" content="<%= Plug.CSRFProtection.get_csrf_token() %>">
+  </head>
+
+  <body class="admin" data-js-view-name="<%= js_view_name(@view_module, @view_template) %>">
+
+      <!-- header navigation -->
+      <%= render_shared "_header.html", conn: @conn %>
+      <!-- /header navigation -->
+
+      <!-- Main content -->
+      <div id="wrapper" class="container-fluid sidebar-minimized">
+          <div class="row">
+              <div class="col-xs-3 col-md-2 sidebar" id="main-sidebar" data-hook="admin_tabs">
+                  <%= render_shared "_main_menu.html", conn: @conn %>
+              </div>
+
+              <div class="col-xs-12 sidebar-collapsed main" id="main-part">
+                  <div class="row">
+                      <%= unless is_nil(get_flash(@conn, :info)) do %>
+                        <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+                      <% end %>
+                      <%= unless is_nil(get_flash(@conn, :error)) do %>
+                        <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+                      <% end %>
+                      <div class="<%= with_sidebar(@conn) %>" id="content" data-hook>
+                          <main>
+                            <%= render @view_module, @view_template, assigns %>
+                          </main>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- /Main content -->
+	  <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+      <script src="<%= static_path(@conn, "/plugins/tinymce/tinymce.min.js") %>"></script>
+      <script type="text/javascript">
+          tinymce.init({
+              selector: "textarea"
+          });
+
+      </script>
+
+      <%= render_existing @view_module, "script.#{@view_template}", assigns %>
+
+  </body>
+</html>

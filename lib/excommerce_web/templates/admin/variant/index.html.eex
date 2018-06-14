@@ -1,0 +1,40 @@
+<h2>Listing variants</h2>
+
+<%= link "All products", to: admin_product_path(@conn, :index), class: "btn btn-success" %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Options</th>
+      <th>Sku</th>
+      <th>Discontinue on</th>
+      <th>Cost price</th>
+
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for variant <- @variants do %>
+    <tr>
+      <td>
+        <%= if variant.is_master do %>
+          <%= "Master Variant" %>
+        <% else %>
+          <%= Enum.map(variant.option_values, fn(x) -> (x.option_type.presentation <>  " - " <> x.presentation) end) |> Enum.join(", ") %>
+        <% end %>
+      </td>
+      <td><%= variant.sku %></td>
+      <td><%= variant.discontinue_on %></td>
+      <td><%= variant.cost_price %></td>
+
+
+      <td class="actions actions-3 text-right" data-hook="admin_products_index_row_actions">
+        <%= link_to_products "Edit", [to: admin_product_variant_path(@conn, :edit, @product, variant), class: "btn btn-primary btn-sm", icon: "edit"] %>
+        <%= link_to_products "Delete", [to: admin_product_variant_path(@conn, :delete, @product, variant), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-sm btn-danger", icon: "delete"] %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+<h5><%= general_link_to "New variant", [to: admin_product_variant_path(@conn, :new, @product), class: "btn btn-success"] %></h5>

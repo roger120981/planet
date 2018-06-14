@@ -1,0 +1,31 @@
+<%= breadcrumbs [@conn, :product] %>
+
+<%= render ExcommerceWeb.Admin.SearchView, "product.html", search_changeset: @search_changeset, search_action: @search_action %>
+
+<table class="table" id="listing_products">
+    <thead>
+    <tr data-hook="admin_products_index_headers">
+        <th >Name</th>
+        <th>Available On</th>
+        <th class="text-center">Master Price</th>
+        <th data-hook="admin_products_index_header_actions" class="actions"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <%= for product <- @products do %>
+    <tr>
+        <td ><%= product.name %></td>
+        <td><%= product.available_on %></td>
+        <td class="text-center"><%= product.master.cost_price %></td>
+
+        <td class="actions actions-3 text-right" data-hook="admin_products_index_row_actions">
+            <%= link_to_products "Edit", [to: admin_product_path(@conn, :edit, product), class: "btn btn-primary btn-sm", icon: "edit"] %>
+            <%= link_to_products "Delete", [to: admin_product_path(@conn, :delete, product), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-sm btn-danger", icon: "delete"] %>
+            <%= link_to_products "Variants", [to: admin_product_variant_path(@conn, :index, product), class: "btn btn-sm btn-primary", icon: "clone"] %>
+        </td>
+    </tr>
+    <% end %>
+    </tbody>
+</table>
+
+<h5><%= general_link_to "New Product", [to: admin_product_path(@conn, :new), class: "btn btn-success", icon: "add" ]%></h5>

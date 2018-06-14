@@ -1,0 +1,29 @@
+
+<table class="table" id="listing_option_type">
+    <thead>
+    <tr data-hook="admin_option_type_index_headers">
+        <th >Name</th>
+        <th colspan="2">Presentation</th>
+
+
+        <th data-hook="admin_option_type_index_header_actions" class="actions"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <%= for option_type <- @option_types do %>
+    <tr>
+        <td ><%= option_type.name %></td>
+        <td colspan="2"><%= option_type.presentation %></td>
+
+
+
+        <td class="actions actions-3 text-right" data-hook="admin_products_index_row_actions">
+            <%= link_to_products "Edit", [to: admin_option_type_path(@conn, :edit, option_type), class: "btn btn-primary btn-sm", icon: "edit"] %>
+            <%= link_to_products "Delete", [to: admin_option_type_path(@conn, :delete, option_type), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-sm btn-danger", icon: "delete"] %>
+
+        </td>
+    </tr>
+    <% end %>
+    </tbody>
+</table>
+<h5><%= general_link_to "New Option Type", [to: admin_option_type_path(@conn, :new), class: "btn btn-success", icon: "add" ]%></h5>

@@ -1,0 +1,6 @@
+<%= breadcrumbs [@conn, :new_product] %>
+
+<%= render "form.html", changeset: @changeset, categories: @categories, tags: @tags, get_option_types: @get_option_types, action: admin_product_path(@conn, :create), conn: @conn %>
+
+
+

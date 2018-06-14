@@ -1,0 +1,62 @@
+<header class="page-header like-parallax">
+  <div class="container">
+    <h1>My account</h1>
+    <ul class="breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/">
+      <!-- Breadcrumb NavXT 6.0.4 -->
+      <li class="home"><span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to Coffee Project." href="<%= page_path(@conn, :index) %>" class="home"><span property="name">Home</span></a><meta property="position" content="1"></span></li>
+      <li class="post post-page current-item"><span property="itemListElement" typeof="ListItem"><span property="name">My account</span><meta property="position" content="2"></span></li>
+    </ul>
+  </div>
+</header>
+
+<div class="container">
+  <!-- Content -->
+  <div class="margin-default">
+    <div class="row">
+      <div class=" col-md-12 text-page">
+        <article id="post-617" class="post-617 page type-page status-publish hentry">
+          <p class="entry-content clearfix" id="entry-div">
+            <p class="woocommerce">
+
+                <h2>Login</h2>
+
+                <%= form_for @conn, session_path(@conn, :create), [as: :session, class: "woocommerce-form woocommerce-form-login login"], fn f -> %>
+                  <%= if f.errors != [] do %>
+                    <div class="alert alert-danger">
+                      <p>Please check the errors below:</p>
+                    </div>
+                  <% end %>
+
+                  <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                    <%= label f, :email, class: "control-label" %>
+                    <%= text_input f, :email, class: "woocommerce-Input woocommerce-Input--text input-text" %>
+                    <%= error_tag f, :email %>
+                  </p>
+
+                  <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                    <%= label f, :password, class: "control-label" %>
+                    <%= password_input f, :password, class: "woocommerce-Input woocommerce-Input--text input-text" %>
+                    <%= error_tag f, :password %>
+                  </p>
+
+                  <p class="form-row">
+                    <%= submit "Login", class: "woocommerce-Button button" %>
+                    <label class="woocommerce-form__label woocommerce-form__label-for-checkbox inline">
+                      <%= checkbox f, :remember_me, class: "woocommerce-form__input woocommerce-form__input-checkbox" %> <span>Remember me</span>
+                    </label>
+                  </p>
+
+                  <p class="woocommerce-LostPassword lost_password">
+                    <%= link "Forgot password", to: password_reset_path(@conn, :new) %>
+                  </p>
+
+                <% end %>
+
+                <span><%= link "Back", to: page_path(@conn, :index) %></span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
