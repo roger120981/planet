@@ -19,8 +19,9 @@ defmodule Excommerce.Catalog.OptionValue do
   @doc false
   def changeset(%OptionValue{} = option_value, attrs \\ %{}) do
     option_value
-    |> cast(attrs, [:delete, :name, :presentation])
+    |> cast(attrs, [:delete, :name, :presentation, :option_type_id])
     |> validate_required([:name, :presentation])
+    #|> foreign_key_constraint(:option_type_id)
 	  |> unique_constraint(:name, name: :option_values_name_option_type_index)
     |> set_delete_action
   end

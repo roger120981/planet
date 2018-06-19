@@ -7,29 +7,56 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello Excommerce!</title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <title>Planet Security</title>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/themes/planet/assets/css/font-awesome.min.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/themes/planet/assets/css/jquery-ui.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/themes/planet/assets/css/bootstrap.min.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/themes/planet/assets/css/animate.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/themes/planet/assets/css/iconfont.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/themes/planet/assets/css/isotope.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/themes/planet/assets/css/magnific-popup.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/themes/planet/assets/css/owl.carousel.min.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/themes/planet/assets/css/owl.theme.default.min.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/themes/planet/assets/css/vertical-menu.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/themes/planet/assets/css/navigation.min.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/themes/planet/assets/css/plugins.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/themes/planet/assets/css/style.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/themes/planet/assets/css/responsive.css") %>">
   </head>
 
   <body>
     <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
-          </ul>
-        </nav>
-        <span class="logo"></span>
-      </header>
 
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
       <main role="main">
+        <%= unless is_nil(get_flash(@conn, :info)) do %>
+        <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+        <% end %>
+        <%= unless is_nil(get_flash(@conn, :error)) do %>
+        <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+        <% end %>
+
         <%= render @view_module, @view_template, assigns %>
       </main>
 
     </div> <!-- /container -->
+    <script src="<%= static_path(@conn, "/themes/planet/assets/js/jquery-ui.js") %>"></script>
+    <script src="<%= static_path(@conn, "/themes/planet/assets/js/modernizr.js") %>"></script>
+    <script src="<%= static_path(@conn, "/themes/planet/assets/js/plugins.js") %>"></script>
+    <script src="<%= static_path(@conn, "/themes/planet/assets/js/Popper.js") %>"></script>
+    <script src="<%= static_path(@conn, "/themes/planet/assets/js/bootstrap.min.js") %>"></script>
+    <script src="<%= static_path(@conn, "/themes/planet/assets/js/isotope.pkgd.min.js") %>"></script>
+    <script src="<%= static_path(@conn, "/themes/planet/assets/js/jquery.magnific-popup.min.js") %>"></script>
+    <script src="<%= static_path(@conn, "/themes/planet/assets/js/owl.carousel.min.js") %>"></script>
+    <script src="<%= static_path(@conn, "/themes/planet/assets/js/jquery.menu-aim.js") %>"></script>
+    <script src="<%= static_path(@conn, "/themes/planet/assets/js/vertical-menu.js") %>"></script>
+    <script src="<%= static_path(@conn, "/themes/planet/assets/js/tweetie.js") %>"></script>
+    <script src="<%= static_path(@conn, "/themes/planet/assets/js/echo.min.js") %>"></script>
+    <script src="<%= static_path(@conn, "/themes/planet/assets/js/jquery.ajaxchimp.min.js") %>"></script>
+    <script src="<%= static_path(@conn, "/themes/planet/assets/js/jquery.countdown.min.js") %>"></script>
+    <script src="<%= static_path(@conn, "/themes/planet/assets/js/jquery.waypoints.min.js") %>"></script>
+    <script src="<%= static_path(@conn, "/themes/planet/assets/js/spectragram.min.js") %>"></script>
+    <script src="<%= static_path(@conn, "/themes/planet/assets/js/main.js") %>"></script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

@@ -3,8 +3,8 @@ defmodule Excommerce.Accounts.User do
   import Ecto.Changeset
 
   alias Excommerce.Accounts.User
-  alias Excommerce.Addresses.UserAddress
-  alias Excommerce.Orders.Order
+  #alias Excommerce.Addresses.UserAddress
+  #alias Excommerce.Orders.Order
 
   schema "users" do
     field :email, :string
@@ -14,9 +14,9 @@ defmodule Excommerce.Accounts.User do
     field :reset_sent_at, :utc_datetime
     field :sessions, {:map, :integer}, default: %{}
 
-    has_many :orders, Order
-    has_many :user_addresses, UserAddress
-    has_many :addresses, through: [:user_addresses, :address]
+    #has_many :orders, Order
+    #has_many :user_addresses, UserAddress
+    #has_many :addresses, through: [:user_addresses, :address]
 
     timestamps()
   end

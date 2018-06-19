@@ -19,13 +19,13 @@ defmodule Excommerce.Catalog.Product do
 
     field :tag_list, :string
 
-    has_one :master, Variant, on_delete: :nilify_all
-    has_many :variants, Variant, on_delete: :nilify_all
+    has_one :master, Variant, on_delete: :delete_all, on_replace: :delete
+    has_many :variants, Variant, on_delete: :delete_all, on_replace: :delete
 
-    has_many :product_option_types, ProductOptionType, on_delete: :nilify_all
+    has_many :product_option_types, ProductOptionType, on_delete: :delete_all, on_replace: :delete
     has_many :option_types, through: [:product_option_types, :option_type]
 
-    has_many :product_categories, ProductCategory, on_delete: :nilify_all
+    has_many :product_categories, ProductCategory, on_delete: :delete_all, on_replace: :delete
     has_many :categories, through: [:product_categories, :category]
 
     many_to_many :tags, Tag, join_through: ProductTag, on_delete: :delete_all, on_replace: :delete

@@ -1,7 +1,10 @@
 defmodule ExcommerceWeb.Admin.ThemeController do
   use ExcommerceWeb, :admin_controller
 
+  import ExcommerceWeb.Authorize
   alias Excommerce.Themes
+
+  plug :user_check
 
   def index(conn, params) do
     data = Themes.list_themes(params)

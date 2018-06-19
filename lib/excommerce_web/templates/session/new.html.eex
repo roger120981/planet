@@ -1,62 +1,47 @@
-<header class="page-header like-parallax">
+<section class="xs-section-padding">
   <div class="container">
-    <h1>My account</h1>
-    <ul class="breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/">
-      <!-- Breadcrumb NavXT 6.0.4 -->
-      <li class="home"><span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to Coffee Project." href="<%= page_path(@conn, :index) %>" class="home"><span property="name">Home</span></a><meta property="position" content="1"></span></li>
-      <li class="post post-page current-item"><span property="itemListElement" typeof="ListItem"><span property="name">My account</span><meta property="position" content="2"></span></li>
-    </ul>
-  </div>
-</header>
-
-<div class="container">
-  <!-- Content -->
-  <div class="margin-default">
     <div class="row">
-      <div class=" col-md-12 text-page">
-        <article id="post-617" class="post-617 page type-page status-publish hentry">
-          <p class="entry-content clearfix" id="entry-div">
-            <p class="woocommerce">
+      <div class="col-md-10 mx-auto">
+        <div class="row customer-info-forms">
+          <div class="col-md-6">
+            <div class="xs-customer-form-wraper">
+                <h3>Log in your account</h3>
 
-                <h2>Login</h2>
-
-                <%= form_for @conn, session_path(@conn, :create), [as: :session, class: "woocommerce-form woocommerce-form-login login"], fn f -> %>
+                <%= form_for @conn, session_path(@conn, :create), [as: :session, class: "xs-customer-form"], fn f -> %>
                   <%= if f.errors != [] do %>
                     <div class="alert alert-danger">
                       <p>Please check the errors below:</p>
                     </div>
                   <% end %>
 
-                  <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                    <%= label f, :email, class: "control-label" %>
-                    <%= text_input f, :email, class: "woocommerce-Input woocommerce-Input--text input-text" %>
+                  <div class="input-group input-group-append">
+                    <%= text_input f, :email, class: "form-control", id: "customer_email", placeholder: "Email Address" %>
+                    <i class="icon icon-profile-male input-group-text"></i>
                     <%= error_tag f, :email %>
-                  </p>
+                  </div>
 
-                  <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                    <%= label f, :password, class: "control-label" %>
-                    <%= password_input f, :password, class: "woocommerce-Input woocommerce-Input--text input-text" %>
+                  <div class="input-group input-group-append">
+                    <%= password_input f, :password, class: "form-control", id: "customer_password", placeholder: "Enter Password" %>
+                    <i class="icon icon-key2 input-group-text"></i>
                     <%= error_tag f, :password %>
-                  </p>
+                  </div>
 
-                  <p class="form-row">
-                    <%= submit "Login", class: "woocommerce-Button button" %>
-                    <label class="woocommerce-form__label woocommerce-form__label-for-checkbox inline">
-                      <%= checkbox f, :remember_me, class: "woocommerce-form__input woocommerce-form__input-checkbox" %> <span>Remember me</span>
-                    </label>
-                  </p>
+                  <%= submit "Login", class: "btn btn-primary btn-block" %>
+                  <p></p>
 
-                  <p class="woocommerce-LostPassword lost_password">
-                    <%= link "Forgot password", to: password_reset_path(@conn, :new) %>
-                  </p>
+                  <div class="custom-control custom-checkbox">
+                    <%= checkbox f, :remember_me, class: "custom-control-input", id: "customCheck1" %><label class="custom-control-label"><span>Remember me</span></label>
+                  </div>
 
+                    <%= link "Forgot password", to: password_reset_path(@conn, :new), class: "btn btn-danger btn-block" %>
+                 <p></p>
                 <% end %>
 
-                <span><%= link "Back", to: page_path(@conn, :index) %></span>
+                <span><%= link "Back", to: page_path(@conn, :index), class: "btn btn-primary btn-block" %></span>
             </div>
           </div>
-        </article>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>

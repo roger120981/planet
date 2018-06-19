@@ -1,9 +1,12 @@
 defmodule ExcommerceWeb.Admin.ProductController do
   use ExcommerceWeb, :admin_controller
+
+  import ExcommerceWeb.Authorize
   
-  alias Excommerce.Catalog.{Product, Tag, OptionType}
+  alias Excommerce.Catalog.{Product, Tag, Category, OptionType}
   alias Excommerce.SearchProduct
 
+  plug :user_check
   plug :scrub_params, "product" when action in [:create, :update]
   plug :load_categories_and_option_types when action in [:create, :new, :edit, :update]
   plug :load_tags when action in [:create, :new, :edit, :update]
@@ -82,7 +85,7 @@ defmodule ExcommerceWeb.Admin.ProductController do
 
   defp load_categories_and_option_types(conn, _params) do
     get_option_types = Repo.all(from strct in OptionType, select: {strct.name, strct.id})
-    categories = Excommerce.Query.Category.leaf_categories_name_and_id(Repo)
+    categories = Repo.all(from cat in Category, select: {cat.name, cat.id})
     conn
     |> assign(:get_option_types, get_option_types)
     |> assign(:categories, categories)

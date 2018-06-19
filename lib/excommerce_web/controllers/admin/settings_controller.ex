@@ -1,8 +1,11 @@
 defmodule ExcommerceWeb.Admin.SettingsController do
   use ExcommerceWeb, :controller
 
+  import ExcommerceWeb.Authorize
   alias Excommerce.Settings
   alias Excommerce.Settings.Setting
+
+  plug :user_check
 
   def show(conn, _params) do
     if settings = Settings.get_settings() do

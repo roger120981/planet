@@ -16,5 +16,20 @@
             <%= link "Categories", to: ExcommerceWeb.Router.Helpers.admin_category_path(@conn, :index) %>
         </li>
     </ul>
+    <a href="#" data-toggle="collapse" data-parent="#sidebar">
+        <span class="icon icon-user"></span>
+        <span class="text">Users</span>
+        <span class="icon icon-chevron-left pull-right"></span>
+    </a>
+    <a href="#" data-toggle="collapse" data-parent="#sidebar">
+        <span class="icon icon-wrench"></span>
+        <span class="text">Configuration</span>
+        <span class="icon icon-chevron-left pull-right"></span>
+    </a>
+    <a href="#" data-toggle="collapse" data-parent="#sidebar">
+        <span class="icon icon-shopping-cart"></span>
+        <span class="text">Orders</span>
+        <span class="icon icon-chevron-left pull-right"></span>
+    </a>
   <% end %>
 </ul>

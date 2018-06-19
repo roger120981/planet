@@ -1,8 +1,10 @@
 defmodule ExcommerceWeb.Admin.CategoryController do
   use ExcommerceWeb, :admin_controller
 
+  import ExcommerceWeb.Authorize
   alias Excommerce.Catalog.Category
 
+  plug :user_check
   plug :scrub_params, "category" when action in [:create, :update]
 
   def index(conn, _params) do

@@ -61,6 +61,10 @@ defmodule ExcommerceWeb do
       def render_shared(template, assigns \\ []) do
         render(ExcommerceWeb.Admin.SharedView, template, assigns)
       end
+
+      def render_front(template, assigns \\ []) do
+        render(ExcommerceWeb.FrontView, template, assigns)
+      end
     end
   end
 

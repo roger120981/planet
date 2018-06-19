@@ -44,14 +44,14 @@
       <div data-hook="new_product_short_description" class="col-xs-12 col-md-6">
         <div class="form-group">
           <%= label f, :short_description, class: "control-label" %>
-          <%= textarea f, :short_description, class: "form-control", rows: 10 %>
+          <%= textarea f, :short_description, class: "taeditor form-control", rows: 10 %>
           <%= error_tag f, :short_description %>
         </div>
       </div>
       <div data-hook="new_product_description" class="col-xs-12 col-md-6">
         <div class="form-group">
           <%= label f, :description, class: "control-label" %><span class="required">*</span>
-          <%= textarea f, :description, class: "form-control", rows: 10, required: true %>
+          <%= textarea f, :description, class: "taeditor form-control", rows: 10, required: true %>
           <%= error_tag f, :description %>
         </div>
       </div>
@@ -125,7 +125,7 @@
 
         </div>
         <% end %>
-        <div><%= link_to_product_option_types_fields %></div>
+        <div><%= link_to_product_option_types_fields() %></div>
       </div>
     </div>
 

@@ -1,10 +1,11 @@
 defmodule ExcommerceWeb.Admin.VariantController do
   use ExcommerceWeb, :admin_controller
 
+  import ExcommerceWeb.Authorize
   alias Excommerce.Catalog
   alias Excommerce.Catalog.{Product, Variant, VariantOptionValue}
 
-
+  plug :user_check
   plug :scrub_params, "variant" when action in [:create, :update]
   plug :find_product
   plug :restrict_action when action in [:new, :create]

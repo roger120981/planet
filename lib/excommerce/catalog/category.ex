@@ -21,6 +21,7 @@ defmodule Excommerce.Catalog.Category do
     category
     |> cast(attrs, [:name, :parent_id])
     |> validate_required([:name])
+    |> foreign_key_constraint(:parent_id)
   end
   
   def children_changeset(%Category{} = category, attrs \\ %{}) do

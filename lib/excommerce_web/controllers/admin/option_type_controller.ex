@@ -1,8 +1,10 @@
 defmodule ExcommerceWeb.Admin.OptionTypeController do
   use ExcommerceWeb, :admin_controller
 
+  import ExcommerceWeb.Authorize
   alias Excommerce.Catalog.OptionType
 
+  plug :user_check
 
   def index(conn, _params) do
     option_types = Excommerce.Catalog.list_option_types()
