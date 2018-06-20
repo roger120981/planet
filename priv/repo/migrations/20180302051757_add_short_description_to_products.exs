@@ -3,7 +3,7 @@ defmodule Excommerce.Repo.Migrations.AddShortDescriptionToProducts do
 
   def change do
 	alter table(:products) do
-      add :short_description, :string
+      add :short_description, :text
     end
   end
 end

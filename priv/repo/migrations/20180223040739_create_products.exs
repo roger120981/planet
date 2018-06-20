@@ -4,12 +4,12 @@ defmodule Excommerce.Repo.Migrations.CreateProducts do
   def change do
     create table(:products) do
       add :name, :string
-      add :description, :string
+      add :description, :text
       add :permalink, :string
       add :available_on, :date
       add :deleted_at, :date
-      add :meta_description, :string
-      add :meta_keywords, :string
+      add :meta_description, :text
+      add :meta_keywords, :text
 
       timestamps()
     end
