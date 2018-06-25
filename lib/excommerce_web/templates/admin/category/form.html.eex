@@ -17,6 +17,12 @@
     <%= error_tag f, :name %>
   </div>
 
+<div class="form-group">
+  <%= label f, :icon, class: "control-label" %>
+  <%= text_input f, :icon, class: "form-control" %>
+  <%= error_tag f, :icon %>
+</div>
+
   <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>

@@ -4,7 +4,7 @@ defmodule Excommerce.Catalog.Variant do
   import Ecto.Changeset
 
   alias Excommerce.Catalog.{Product, VariantOptionValue, Variant}
-
+  alias Excommerce.Orders.LineItem
 
   schema "variants" do
     field :cost_currency, :string
@@ -31,6 +31,8 @@ defmodule Excommerce.Catalog.Variant do
     #has_many :variant_images, Excommerce.Catalog.Image
     has_many :variant_option_values, VariantOptionValue, on_delete: :delete_all, on_replace: :delete
     has_many :option_values, through: [:variant_option_values, :option_value]
+
+    has_many :line_items, LineItem
 
     timestamps()
   end
@@ -70,7 +72,7 @@ defmodule Excommerce.Catalog.Variant do
     #|> cast_assoc(:variant_images)
   end
 
-  def create_variant_changeset(%Variant{} = variant, product, attrs \\ %{}) do
+  def create_variant_changeset(variant, product, attrs \\ %{}) do
     changeset(variant, attrs)
     |> validate_discontinue_gt_available_on(product)
     |> put_change(:is_master, false)
@@ -79,7 +81,7 @@ defmodule Excommerce.Catalog.Variant do
     |> cast_assoc(:variant_option_values, required: true, with: &VariantOptionValue.from_variant_changeset/2)
   end
 
-  def update_variant_changeset(%Variant{} = variant, product, attrs \\ %{}) do
+  def update_variant_changeset(variant, product, attrs \\ %{}) do
     changeset(variant, attrs)
     |> validate_discontinue_gt_available_on(product)
     |> validate_not_master
@@ -118,5 +120,95 @@ defmodule Excommerce.Catalog.Variant do
   defp validate_discontinue_gt_available_on(changeset, product) do
     changeset
       |> Excommerce.Validations.Date.validate_gt_date(:discontinue_on, product.available_on)
+  end
+
+  @required_fields ~w(buy_count)a
+  @optional_fields ~w()a
+  def buy_changeset(variant, attrs \\ %{}) do
+    variant
+    |> cast(attrs, @required_fields ++ @optional_fields)
+    |> validate_required(@required_fields)
+    |> validate_number(:buy_count, greater_than: 0)
+    |> increment_bought_quantity
+  end
+
+  def restocking_changeset(variant, attrs) do
+    variant
+    |> cast(attrs, [:restock_count])
+    |> validate_required([:restock_coun])
+    |> validate_number(:restock_count, greater_than: 0)
+    |> decrement_bought_quantity
+  end
+
+  defp update_total_quantity(variant) do
+    quantity_to_add = variant.changes[:add_count]
+    if quantity_to_add do
+      put_change(variant, :total_quantity, variant.data.total_quantity + quantity_to_add)
+    else
+      variant
+    end
+  end
+
+  defp increment_bought_quantity(variant) do
+    quantity_to_add = variant.changes[:buy_count]
+    if quantity_to_add do
+      put_change(variant, :bought_quantity, (variant.data.bought_quantity || 0) + quantity_to_add)
+    else
+      variant
+    end
+  end
+
+  defp decrement_bought_quantity(variant) do
+    quantity_to_subtract = variant.changes[:restock_count]
+    if quantity_to_subtract do
+      put_change(variant, :bought_quantity, (variant.data.bought_quantity || 0) - quantity_to_subtract)
+    else
+      variant
+    end
+  end
+
+  def available_quantity(%Variant{total_quantity: total_quantity, bought_quantity: bought_quantity}) when is_nil(bought_quantity) do
+    total_quantity
+  end
+
+  def available_quantity(%Variant{total_quantity: total_quantity, bought_quantity: bought_quantity}) do
+    total_quantity - bought_quantity
+  end
+
+  def display_name(variant) do
+    product = variant.product
+    "#{product.name}(#{variant.sku})"
+  end
+
+  def sufficient_quantity_available?(variant, requested_quantity) do
+    available_quantity(variant) >= requested_quantity
+  end
+
+  def discontinued?(variant) do
+    discontinue_on = variant.discontinue_on
+    if discontinue_on do
+      case Date.compare(discontinue_on, Date.utc_today) do
+        :lt -> true
+        _   -> false
+      end
+    else
+      false
+    end
+  end
+
+  def availability_status(variant, requested_quantity \\ 0) do
+    cond do
+      discontinued?(variant) ->
+        :discontinued
+      not sufficient_quantity_available?(variant, requested_quantity) ->
+        available = available_quantity(variant)
+        if available > 0 do
+          {:insufficient_quantity, available}
+        else
+          :out_of_stock
+        end
+      true ->
+        :ok
+    end
   end
 end

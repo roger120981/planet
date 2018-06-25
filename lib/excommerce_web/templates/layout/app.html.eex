@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf" content="<%= Plug.CSRFProtection.get_csrf_token() %>">
 
     <title>Planet Security</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/themes/planet/assets/css/font-awesome.min.css") %>">
@@ -24,22 +25,32 @@
     <link rel="stylesheet" href="<%= static_path(@conn, "/themes/planet/assets/css/responsive.css") %>">
   </head>
 
-  <body>
-    <div class="container">
+  <body data-js-view-name="<%= js_view_name(@view_module, @view_template) %>">
 
 
-      <main role="main">
+      <!-- Top bar navigation -->
+      <%= render_front "_top_bar.html", conn: @conn, current_user: @current_user %>
+      <!-- /Top bar navigation -->
+
+      <!-- header navigation -->
+      <%= render_front "_header.html", conn: @conn, current_user: @current_user, root_cat: @root_cat %>
+      <!-- /header navigation -->
+
+      <div class="container">
         <%= unless is_nil(get_flash(@conn, :info)) do %>
         <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
         <% end %>
         <%= unless is_nil(get_flash(@conn, :error)) do %>
         <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
         <% end %>
-
+      </div>
         <%= render @view_module, @view_template, assigns %>
-      </main>
 
-    </div> <!-- /container -->
+      <!-- Top bar navigation -->
+      <%= render_front "_footer.html", conn: @conn, current_user: @current_user %>
+      <!-- /Top bar navigation -->
+    
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
     <script src="<%= static_path(@conn, "/themes/planet/assets/js/jquery-ui.js") %>"></script>
     <script src="<%= static_path(@conn, "/themes/planet/assets/js/modernizr.js") %>"></script>
     <script src="<%= static_path(@conn, "/themes/planet/assets/js/plugins.js") %>"></script>
@@ -57,6 +68,6 @@
     <script src="<%= static_path(@conn, "/themes/planet/assets/js/jquery.waypoints.min.js") %>"></script>
     <script src="<%= static_path(@conn, "/themes/planet/assets/js/spectragram.min.js") %>"></script>
     <script src="<%= static_path(@conn, "/themes/planet/assets/js/main.js") %>"></script>
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+
   </body>
 </html>

@@ -7,6 +7,7 @@ defmodule Excommerce.Catalog.Category do
 
   schema "categories" do
     field :name, :string
+    field :icon, :string
     belongs_to :parent, Category
     has_many :children, Category, foreign_key: :parent_id
 
@@ -17,14 +18,14 @@ defmodule Excommerce.Catalog.Category do
   end
 
   @doc false
-  def changeset(%Category{} = category, attrs \\ %{}) do
+  def changeset(category, attrs \\ %{}) do
     category
-    |> cast(attrs, [:name, :parent_id])
+    |> cast(attrs, [:name, :parent_id, :icon])
     |> validate_required([:name])
     |> foreign_key_constraint(:parent_id)
   end
   
-  def children_changeset(%Category{} = category, attrs \\ %{}) do
+  def children_changeset(category, attrs \\ %{}) do
     changeset(category, attrs)
     |> cast_assoc(:children)
   end

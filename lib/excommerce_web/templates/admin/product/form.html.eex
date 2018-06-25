@@ -27,14 +27,22 @@
     </div>
     <% end %>
     <div data-hook="new_product_attrs" class="row">
-      <div data-hook="new_product_meta_description" class="col-xs-12 col-md-6">
+
+      <div data-hook="new_product_meta_title" class="col-xs-12 col-md-4">
+        <div class="form-group">
+          <%= label f, :meta_title, class: "control-label" %>
+          <%= textarea f, :meta_title, class: "form-control" %>
+          <%= error_tag f, :meta_title %>
+        </div>
+      </div>
+      <div data-hook="new_product_meta_description" class="col-xs-12 col-md-4">
         <div class="form-group">
           <%= label f, :meta_description, class: "control-label" %><span class="required">*</span>
           <%= textarea f, :meta_description, class: "form-control", required: true %>
           <%= error_tag f, :meta_description %>
         </div>
       </div>
-      <div data-hook="new_product_meta_keywords" class="col-xs-12 col-md-6">
+      <div data-hook="new_product_meta_keywords" class="col-xs-12 col-md-4">
         <div class="form-group">
           <%= label f, :meta_keywords, class: "control-label" %><span class="required">*</span>
           <%= textarea f, :meta_keywords, class: "form-control", required: true %>
@@ -82,9 +90,15 @@
           <%= error_tag m, :add_count %>
         </div>
       </div>
-
+      <div data-hook="new_product_featured" class="col-xs-12 col-md-4">
+        <div class="form-group">
+          <%= label f, :featured, class: "control-label" %>
+          <%= checkbox f, :featured, class: "form-control" %>
+          <%= error_tag f, :featured %>
+        </div>
+      </div>
       <%= if @changeset.data.id do %>
-      <div data-hook="new_product_image" class="col-xs-12 col-md-6">
+      <div data-hook="new_product_image" class="col-xs-12 col-md-4">
           <div class="form-group">
             <%= label m, :image, "Master image", class: "control-label" %>
             <%= file_input m, :image, class: "form-control" %>
@@ -94,7 +108,7 @@
             <%= error_tag m, :image %>
           </div>
       </div>
-      <div data-hook="new_product_discontinue" class="col-xs-12 col-md-6">
+      <div data-hook="new_product_discontinue" class="col-xs-12 col-md-4">
         <div class="form-group ">
           <%= label m, :discontinue_on, class: "control-label" %><span class="required">*</span>
           <%= text_input m, :discontinue_on, class: "datepicker form-control", required: true %>

@@ -1,4 +1,4 @@
-
+<h2>Listing option types</h2>
 <table class="table" id="listing_option_type">
     <thead>
     <tr data-hook="admin_option_type_index_headers">

@@ -12,7 +12,7 @@ defmodule Excommerce.Catalog.ProductTag do
   end
 
   @doc false
-  def changeset(%ProductTag{} = product_tag, attrs) do
+  def changeset(product_tag, attrs) do
     product_tag
     |> cast(attrs, [:product_id, :tag_id])
     |> validate_required([:product_id, :tag_id])

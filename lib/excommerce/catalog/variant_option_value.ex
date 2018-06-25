@@ -15,7 +15,7 @@ defmodule Excommerce.Catalog.VariantOptionValue do
   end
 
   @doc false
-  def changeset(%VariantOptionValue{} = variant_option_value, attrs) do
+  def changeset(variant_option_value, attrs) do
     variant_option_value
     |> cast(attrs, [:variant_id, :option_value_id])
     |> validate_required([:variant_id, :option_value_id])
@@ -23,7 +23,7 @@ defmodule Excommerce.Catalog.VariantOptionValue do
   
   @required_fields ~w(option_value_id option_type_id)a
   @optional_fields ~w()a
-  def from_variant_changeset(%VariantOptionValue{} = variant_option_value, attrs \\ %{}) do
+  def from_variant_changeset(variant_option_value, attrs \\ %{}) do
     variant_option_value
     |> cast(attrs, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)

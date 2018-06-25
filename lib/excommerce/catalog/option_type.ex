@@ -16,7 +16,7 @@ defmodule Excommerce.Catalog.OptionType do
   end
 
   @doc false
-  def changeset(%OptionType{} = option_type, attrs \\ %{}) do
+  def changeset(option_type, attrs \\ %{}) do
     option_type
     |> cast(attrs, [:name, :presentation])
     |> validate_required([:name, :presentation])

@@ -4,10 +4,10 @@ defmodule ExcommerceWeb.VariantImage do
   
   @versions [:original]
 
-  # @versions [:original, :thumb]
-  # @extension_whitelist ~w(.jpg .jpeg .gif .png)
+   #@versions [:original, :thumb]
+   #@extension_whitelist ~w(.jpg .jpeg .gif .png)
 
-  # def acl(:thumb, _), do: :public
+  #def acl(:thumb, _), do: :public
 
   #def validate({file, _}) do
     #file_extension = file.file_name |> Path.extname |> String.downcase
@@ -15,18 +15,18 @@ defmodule ExcommerceWeb.VariantImage do
   #end
 
   #def transform(:thumb, _) do
-   # {:convert, "-thumbnail 300x300^ -gravity center -extent 100x100 -format png"}
+    #{:convert, "-thumbnail 300x300^ -gravity center -extent 100x100 -format png"}
   #end
 
   #def filename(version, _) do
-   # version
+   #version
   #end
 
   #def storage_dir(_, {_file, variant}) do
-   # "uploads/variant_images/#{variant.id}"
+    #"uploads/variant_images/#{variant.id}"
   #end
 
   #def default_url(:thumb) do
-   # "uploads/no_image.jpg"
+  #  "uploads/no_image.jpg"
   #end
 end

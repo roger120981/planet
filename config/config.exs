@@ -31,6 +31,8 @@ config :liquid,
 
 config :scrivener_html,
        routes_helper: Excommerce.Router.Helpers
+	   
+config :worldly, :data_path, Path.join(Mix.Project.build_path, "lib/worldly/priv/data")	   
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

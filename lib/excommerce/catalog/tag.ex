@@ -14,7 +14,7 @@ defmodule Excommerce.Catalog.Tag do
   end
 
   @doc false
-  def changeset(%Tag{} = tag, attrs) do
+  def changeset(tag, attrs) do
     tag
     |> cast(attrs, [:name, :slug])
     |> validate_required([:name])

@@ -7226,3 +7226,11 @@ img[src="assets/images/image_loader.gif"] {
     font-size: 380px;
     color: #000000;
     text-indent: -65px; }
+img.image_featured {
+  width: 540px !important;
+  height: 550px !important;
+}
+img.image_t {
+  width: 255px !important;
+  height: 260px !important;
+}

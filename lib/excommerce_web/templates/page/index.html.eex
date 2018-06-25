@@ -1,3 +1,42 @@
-<%= for category <- @categories do %>
-<%= category.name %>
-<% end %>
+<div class="xs-section-padding xs-feauture-product-section">
+    <div class="container">
+
+        <div class="xs-heading">
+            <h3 class="xs-heading-title">Featured Products</h3>
+        </div>
+        <div class="row">
+            <%= for {product, index} <- Enum.with_index(@products) do %>
+            <%= if index == 0 do %>
+            <div class="col-lg-6">
+                <div class="xs-feature-product highlight">
+                    <%= if product.master.image do %>
+                      <%= tag(:img, src: ExcommerceWeb.VariantImage.url({product.master.image, product.master}), class: "image_featured") %>
+                    <% end %>
+                    <div class="xs-feature-product-info">
+                        <h4 class="product-title-v2 large"><a href="<%= product_path(@conn, :show, product) %>"><strong><%= product.name %></strong></a></h4>
+                    </div>
+                </div>
+            </div>
+            <% else %>
+            <div class="col-lg-6 xs-padding-0">
+                <div class="row xs-margin-0">
+                    <div class="col-md-6">
+                        <div class="xs-feature-product">
+                            <%= if product.master.image do %>
+                              <%= tag(:img, src: ExcommerceWeb.VariantImage.url({product.master.image, product.master}), class: "image_t") %>
+                            <% end %>
+                            <div class="xs-feature-product-info">
+                                <h4 class="product-title-v2"><a href="<%= product_path(@conn, :show, product) %>"><strong><%= product.name %></strong></a></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% end %>
+            <% end %>
+
+        </div>
+
+
+    </div>
+</div>

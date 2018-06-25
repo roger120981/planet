@@ -17,7 +17,7 @@ defmodule Excommerce.Catalog.OptionValue do
   end
 
   @doc false
-  def changeset(%OptionValue{} = option_value, attrs \\ %{}) do
+  def changeset(option_value, attrs \\ %{}) do
     option_value
     |> cast(attrs, [:delete, :name, :presentation, :option_type_id])
     |> validate_required([:name, :presentation])

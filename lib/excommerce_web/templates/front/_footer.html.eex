@@ -1,0 +1,73 @@
+<!-- footer section start -->
+<footer class="xs-footer-section">
+    <div class="xs-footer-main">
+        <div class="container">
+            <div class="xs-footer-logo">
+                <a href="<%= page_path(@conn, :index) %>">
+                    <img src="<%= static_path(@conn, "/images/front/footer_logo.png") %>" alt="">
+                </a>
+            </div><!-- .xs-footer-logo END -->
+            <div class="row">
+                <div class="col-md-6 col-lg-5 footer-widget footer-content">
+                    <h3 class="widget-title">MarketPress Super Points™ Program</h3>
+                    <div class="media xs-footer-description">
+                        <img src="<%= static_path(@conn, "/images/front/points.png") %>" alt="Generic placeholder image">
+                        <div class="media-body align-self-center">
+                            <p>Earn reward points every time you shop on marketpress.com. Not a member yet? <a href="#">Join for Free</a></p>
+                        </div>
+                    </div><!-- .media .xs-footer-description END -->
+                    <h3 class="widget-title">Available Now</h3>
+                    <div class="xs-btn-wraper">
+                        <a href="#">
+                            <img src="<%= static_path(@conn, "/images/front/play-store.png") %>" alt="">
+                        </a>
+                        <a href="#">
+                            <img src="<%= static_path(@conn, "/images/front/app-store.png") %>" alt="">
+                        </a>
+                    </div><!-- .xs-btn-wraper END -->
+                </div><!-- .footer-widget .footer-content END -->
+                <div class="col-md-6 col-lg-2 footer-widget">
+                    <h3 class="widget-title">Quick Links</h3>
+                    <ul class="xs-list">
+                        <li><a href="#">Support Center</a>							</li>
+                        <li><a href="#">Term & Conditions</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Help</a></li>
+                        <li><a href="#">Products Return</a></li>
+                        <li><a href="#">FAQS</a></li>
+                    </ul><!-- .xs-list END -->
+                </div><!-- .footer-widget END -->
+                <div class="col-md-6 col-lg-2 footer-widget">
+                    <h3 class="widget-title">Our Stores</h3>
+                    <ul class="xs-list">
+                        <li><a href="#">New York</a></li>
+                        <li><a href="#">London SF</a></li>
+                        <li><a href="#">Cockfosters BP</a></li>
+                        <li><a href="#">Los Angeles</a></li>
+                        <li><a href="#">Chicago</a></li>
+                        <li><a href="#">Las Vegas</a></li>
+                        <li><a href="#">Albarto</a></li>
+                    </ul><!-- .xs-list END -->
+                </div><!-- .footer-widget END -->
+                <div class="col-md-6 col-lg-3 footer-widget">
+                    <h3 class="widget-title">News Feeds</h3>
+                    <div class="xs-tweet"></div>
+                </div><!-- .footer-widget END -->
+            </div>
+        </div>
+    </div><!-- .xs-footer-main END -->
+    <div class="xs-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="xs-copyright-text">
+                        &copy; 2018 <a href="https://themeforest.net/user/xpeedstudio/portfolio">XpeedStudio</a> All Rights Reserved
+                    </div><!-- .xs-copyright-text END -->
+                </div>
+
+            </div>
+        </div>
+    </div><!-- .xs-copyright END -->
+</footer>
+<!-- footer section end -->

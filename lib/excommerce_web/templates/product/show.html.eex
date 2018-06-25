@@ -1,0 +1,49 @@
+<div class="xs-section-padding xs-product-details-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="xs-sync-slider-preview">
+          <ul class="xs-social-tigger">
+            <li><a href="https://plus.google.com/discover" class="xs-google-plus"><i class="fa fa-google-plus"></i></a></li>
+            <li><a href="https://www.facebook.com/" class="xs-facebook"><i class="icon icon-facebook"></i></a></li>
+            <li><a href="https://twitter.com/" class="xs-twitter"><i class="icon icon-twitter"></i></a></li>
+            <li><a href="https://www.instagram.com/" class="xs-instagram"><i class="icon icon-instagram"></i></a></li>
+            <li><a class="tigger-icon" href="#"><i class="fa fa-share"></i></a></li>
+          </ul>
+          <div class="">
+            <div class="item">
+              <%= if @product.master.image do %>
+              <%= tag(:img, src: ExcommerceWeb.VariantImage.url({@product.master.image, @product.master}), class: "image_featured") %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="summary-content single-product-summary">
+          <h4 class="product-title"><%= @product.name %></h4>
+          <span class="price highlight">
+             $ <%= @product.master.cost_price %>
+           </span>
+          <%= raw @product.short_description %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="xs-section-padding-bottom">
+  <div class="container">
+    <ul class="nav nav-tabs xs-nav-tab version-4" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Descriptions</a>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane animated slideInUp show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <%= raw @product.description %>
+      </div>
+    </div>
+  </div>
+</div>

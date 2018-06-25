@@ -21,7 +21,7 @@ defmodule Excommerce.Settings.Setting do
   end
 
   @doc false
-  def changeset(%Setting{} = setting, attrs) do
+  def changeset(setting, attrs) do
     setting
     |> cast(attrs, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)

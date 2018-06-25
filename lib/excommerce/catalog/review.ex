@@ -15,7 +15,7 @@ defmodule Excommerce.Catalog.Review do
   end
 
   @doc false
-  def changeset(%Review{} = review, attrs) do
+  def changeset(review, attrs) do
     review
     |> cast(attrs, [:score, :title, :content])
     |> validate_required([:title, :content])

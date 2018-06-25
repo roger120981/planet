@@ -8,6 +8,25 @@ defmodule Excommerce.Query.Category do
       select: cat.parent_id
   end
 
+  def get_root_cat do
+    from cat in Excommerce.Catalog.Category,
+      where: is_nil(cat.parent_id)
+  end
+
+  def get_root_cat(repo) do
+    repo.all(get_root_cat())
+  end
+
+  def get_children_cat(repo)  do
+    repo.all(parent_ids())
+    |> children_cat
+    |> repo.all
+  end
+
+  def children_cat(parent_ids) do
+    from cat in Excommerce.Catalog.Category, where: cat.id in ^parent_ids
+  end
+
   def with_associated_products do
     from cat in Excommerce.Catalog.Category,
      join: p_cat in assoc(cat, :product_categories),

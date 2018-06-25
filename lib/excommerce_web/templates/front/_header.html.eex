@@ -1,0 +1,89 @@
+<header class="xs-header">
+    <!-- nav bar section -->
+    <div class="xs-navBar">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-sm-4 xs-order-1">
+                    <div class="xs-logo-wraper">
+                        <a href="<%= page_path(@conn, :index) %>">
+                            <img src="<%= static_path(@conn, "/images/front/logo.png") %>" alt="">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-7 col-sm-3 xs-order-3 xs-menus-group">
+                    <nav class="xs-menus">
+                        <div class="nav-header">
+                            <div class="nav-toggle"></div>
+                        </div><!-- .nav-header END -->
+                        <div class="nav-menus-wrapper">
+                            <ul class="nav-menu">
+                                <li class="active"><a href="<%= page_path(@conn, :index) %>">Home</a></li>
+                                <li class=""><a href="<%= page_path(@conn, :index) %>">Pages</a></li>
+                                <li class=""><a href="<%= page_path(@conn, :index) %>">Shop</a></li>
+                                <li class=""><a href="<%= page_path(@conn, :index) %>">Blog</a></li>
+                                <li class=""><a href="<%= page_path(@conn, :index) %>">Gallery</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+
+            </div><!-- .row END -->
+        </div><!-- .container END -->
+    </div>    <!-- End nav bar section -->
+
+    <!-- sidebar cart item -->
+
+
+    <!-- nav down section -->
+    <div class="xs-navDown">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 d-none d-md-none d-lg-block">
+                    <!-- vertical menu bar -->
+                    <div class="cd-dropdown-wrapper xs-vartical-menu">
+                        <a class="cd-dropdown-trigger" href="#0">
+                            <i class="fa fa-list-ul"></i> All Categories
+                        </a>
+
+                        <nav class="cd-dropdown">
+                            <h2>Planet Security</h2>
+                            <a href="#0" class="cd-close">Close</a>
+                            <ul class="cd-dropdown-content">
+                                <%= for mcat <- @root_cat do %>
+                                <li class="">
+                                    <a class="no-padding" href="<%= category_products_path(@conn, :associated_products, mcat) %>"><i class="icon icon-<%= mcat.icon %>"></i><%= mcat.name %> </i></a>
+
+                                </li>
+                                <% end %>
+                            </ul>
+                        </nav>
+
+                    </div> <!-- .cd-dropdown-wrapper -->
+                    <!-- End vertical menu bar -->
+                </div>
+                <div class="col-lg-6">
+                    <form class="xs-navbar-search" method="get" action="#">
+                        <div class="input-group">
+                            <input type="search" class="form-control" placeholder="Find your product">
+                            <div class="xs-category-select-wraper">
+                                <select class="xs-category-select">
+                                    <option value="0">All Categories</option>
+
+                                </select>
+                            </div>
+                            <div class="input-group-btn">
+                                <input type="hidden" id="search-param" name="post_type" value="product">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div><!-- .row END -->
+        </div><!-- .container END -->
+    </div>    <!-- End nav down section -->
+
+    <!-- <div class="nav-cover"></div> -->
+</header>
+<!-- End header section -->

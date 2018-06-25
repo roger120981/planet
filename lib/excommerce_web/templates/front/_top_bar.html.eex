@@ -1,0 +1,31 @@
+<div class="xs-top-bar d-none d-md-none d-lg-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <ul class="xs-top-bar-info">
+                                <li><a href="#"><i class="icon icon-van "></i>Free Delivery</a></li>
+                                <li><a href="#">Return Policy</a></li>
+                            </ul><!-- .xs-top-bar-info END -->
+                        </div>
+                        <div class="col-lg-6">
+                            <ul class="xs-social-list">
+                                <li class="xs-list-text">Follow Us</li>
+                                <li><a href="#"><i class="icon icon-facebook"></i></a></li>
+                                <li><a href="#"><i class="icon icon-twitter"></i></a></li>
+                                <li><a href="#"><i class="icon icon-pinterest"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            </ul><!-- .xs-social-list END -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="xs-top-bar-info right-content">
+                        <li><a href="#" data-toggle="modal" data-target=".xs-modal">Login</a></li>
+                    </ul>
+                </div>
+            </div><!-- .row END -->
+        </div><!-- .container END -->
+</div>
+

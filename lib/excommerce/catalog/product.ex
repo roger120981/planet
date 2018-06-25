@@ -5,6 +5,7 @@ defmodule Excommerce.Catalog.Product do
   alias Excommerce.Slug
   alias Excommerce.Catalog.{Variant, Tag, ProductTag, ProductOptionType, ProductCategory}
   alias Excommerce.Repo
+  alias Excommerce.Validations.Date
 
   @derive {Phoenix.Param, key: :permalink}
   schema "products" do
@@ -15,7 +16,9 @@ defmodule Excommerce.Catalog.Product do
     field :meta_keywords, :string
     field :name, :string
     field :permalink, :string
-    field :short_description
+    field :short_description, :string
+    field :meta_title, :string
+    field :featured, :boolean
 
     field :tag_list, :string
 
@@ -35,13 +38,13 @@ defmodule Excommerce.Catalog.Product do
 
   def changeset(product, attrs) do
     product
-    |> cast(attrs, [:name, :description, :permalink, :available_on, :deleted_at, :tag_list, :short_description, :meta_description, :meta_keywords])
+    |> cast(attrs, [:name, :description, :permalink, :available_on, :featured, :meta_title, :deleted_at, :tag_list, :short_description, :meta_description, :meta_keywords])
   end
 
   @doc " Main product changeset for store."
   def create_changeset(product, attrs) do
     product
-    |> cast(attrs, [:name, :description, :permalink, :available_on, :tag_list, :deleted_at, :meta_description, :meta_keywords, :short_description])
+    |> cast(attrs, [:name, :description, :permalink, :available_on, :tag_list, :featured, :meta_title, :deleted_at, :meta_description, :meta_keywords, :short_description])
     |> validate_required([:name, :description, :available_on, :meta_description, :meta_keywords])
     |> Slug.generate_slug()
     |> cast_assoc(:master, required: true, with: &Variant.create_master_changeset/2)
@@ -53,14 +56,29 @@ defmodule Excommerce.Catalog.Product do
 
   def update_changeset(product, attrs) do
     product
-    |> cast(attrs, [:name, :description, :permalink, :available_on, :tag_list, :deleted_at, :meta_description, :meta_keywords, :short_description])
+    |> cast(attrs, [:name, :description, :permalink, :available_on, :tag_list, :featured, :meta_title, :deleted_at, :meta_description, :meta_keywords, :short_description])
     |> validate_required([:name, :description, :available_on, :meta_description, :meta_keywords])
     |> Slug.generate_slug()
     |> cast_assoc(:master, required: true, with: &Variant.update_master_changeset/2)
+    |> validate_available_on_lt_discontinue_on
     |> cast_assoc(:product_option_types, with: &ProductOptionType.from_product_changeset/2)
     |> cast_assoc(:product_categories, with: &ProductCategory.from_product_changeset/2)
     |> put_assoc(:tags, parse_tags(attrs))
     |> unique_constraint(:permalink)
+  end
+
+  defp validate_available_on_lt_discontinue_on(changeset) do
+    changeset
+    |> Date.validate_lt_date(:available_on, changed_discontinue_on(changeset))
+  end
+
+  defp changed_discontinue_on(changeset) do
+    changed_master = get_change(changeset, :master)
+    if changed_master do
+      get_change(changed_master, :discontinue_on) || changed_master.data.discontinue_on
+    else
+      changeset.data.master.discontinue_on
+    end
   end
 
   defp parse_tags(attrs)  do

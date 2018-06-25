@@ -49,8 +49,13 @@ defmodule Excommerce.Mixfile do
       {:timex_ecto, "~> 3.0"},
       {:liquid, "~> 0.8.0"},
       {:mime, "~> 1.1"},
+      {:worldly, "~> 0.1.2"},
       {:scrivener_ecto, "~> 1.0"},
-      {:scrivener_html, "~> 1.7.1"}
+      {:scrivener_html, "~> 1.7.1"},
+      {:commerce_billing, github: "nimish-mehta/commerce_billing", override: true},
+      {:poison, "~> 3.1", override: true},
+      {:yamerl, github: "yakaz/yamerl"},
+      {:braintree, "~> 0.5.0"}
     ]
   end
 

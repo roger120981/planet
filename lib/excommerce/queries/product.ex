@@ -29,6 +29,12 @@ defmodule Excommerce.Query.Product do
     from variant in all_variants_including_master(product), where: variant.is_master
   end
 
+  def featured_products do
+    from p in Excommerce.Catalog.Product, where: p.featured == true, limit: 5, preload: [master: ^Excommerce.Query.Variant.master_variants]
+  end
+
+  def featured_products(repo), do: repo.all(featured_products())
+
   def master_variant(repo, product) do
     repo.one(master_variant(product))
   end
@@ -52,7 +58,7 @@ defmodule Excommerce.Query.Product do
   def product_with_master_variant(repo, product_id), do: repo.one(product_with_master_variant(product_id))
 
   def product_with_variants(product_id) do
-    from p in products_with_variants(), where: p.id == ^product_id
+    from p in products_with_variants(), where: p.permalink == ^product_id
   end
 
   def product_with_variants(repo, product_id), do: repo.one(product_with_variants(product_id))
