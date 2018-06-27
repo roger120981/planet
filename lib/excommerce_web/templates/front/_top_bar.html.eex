@@ -22,7 +22,8 @@
                 </div>
                 <div class="col-lg-6">
                     <ul class="xs-top-bar-info right-content">
-                        <li><a href="#" data-toggle="modal" data-target=".xs-modal">Login</a></li>
+                        <li><a href="<%= page_path(@conn, :index) %>" style="color: #0063d1">ENG</a> </li>
+                        <li><a href="<%= session_path(@conn, :new) %>" >Login</a></li>
                     </ul>
                 </div>
             </div><!-- .row END -->

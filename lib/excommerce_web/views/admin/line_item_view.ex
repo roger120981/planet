@@ -21,7 +21,6 @@ defmodule ExcommerceWeb.Admin.LineItemView do
   end
 
   def render("error.json", %{changeset: changeset}) do
-    #render_changeset_error_json(changeset)
-
+    render_changeset_error_json(changeset)
   end
 end

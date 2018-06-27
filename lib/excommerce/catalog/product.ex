@@ -19,6 +19,7 @@ defmodule Excommerce.Catalog.Product do
     field :short_description, :string
     field :meta_title, :string
     field :featured, :boolean
+    field :ante_title, :string
 
     field :tag_list, :string
 
@@ -44,7 +45,7 @@ defmodule Excommerce.Catalog.Product do
   @doc " Main product changeset for store."
   def create_changeset(product, attrs) do
     product
-    |> cast(attrs, [:name, :description, :permalink, :available_on, :tag_list, :featured, :meta_title, :deleted_at, :meta_description, :meta_keywords, :short_description])
+    |> cast(attrs, [:name, :description, :permalink, :available_on, :ante_title, :tag_list, :featured, :meta_title, :deleted_at, :meta_description, :meta_keywords, :short_description])
     |> validate_required([:name, :description, :available_on, :meta_description, :meta_keywords])
     |> Slug.generate_slug()
     |> cast_assoc(:master, required: true, with: &Variant.create_master_changeset/2)
@@ -56,7 +57,7 @@ defmodule Excommerce.Catalog.Product do
 
   def update_changeset(product, attrs) do
     product
-    |> cast(attrs, [:name, :description, :permalink, :available_on, :tag_list, :featured, :meta_title, :deleted_at, :meta_description, :meta_keywords, :short_description])
+    |> cast(attrs, [:name, :description, :permalink, :available_on, :ante_title, :tag_list, :featured, :meta_title, :deleted_at, :meta_description, :meta_keywords, :short_description])
     |> validate_required([:name, :description, :available_on, :meta_description, :meta_keywords])
     |> Slug.generate_slug()
     |> cast_assoc(:master, required: true, with: &Variant.update_master_changeset/2)

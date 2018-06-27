@@ -1,7 +1,9 @@
+import AjaxSetup from "../lib/ajax_setup";
 
 export default class AdminBaseView {
   mount() {
 
+      AjaxSetup.setup();
 
       $('#main-sidebar').find('[data-toggle="collapse"]').on('click', function()
           {

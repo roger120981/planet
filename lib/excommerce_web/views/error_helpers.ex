@@ -37,4 +37,24 @@ defmodule ExcommerceWeb.ErrorHelpers do
       Gettext.dgettext(ExcommerceWeb.Gettext, "errors", msg, opts)
     end
   end
+
+  def render_changeset_error_json(changeset) do
+    errors = Enum.map(changeset.errors, fn {field, details} ->
+      %{
+        field: field,
+        detail: render_detail(details)
+      }
+    end)
+    %{errors: errors}
+  end
+
+  def render_detail({message, values}) do
+    Enum.reduce values, message, fn {k, v}, acc ->
+      String.replace(acc, "%{#{k}}", to_string(v))
+    end
+  end
+
+  def render_detail(message) do
+    message
+  end
 end

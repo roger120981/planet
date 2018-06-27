@@ -1,40 +1,75 @@
+<!-- banner section -->
+<div class="xs-banner">
+    <div class="xs-banner-slider owl-carousel">
+        <%= for product <- @products do %>
+        <div class="xs-banner-item" style="background-image:url('<%= static_path(@conn, "/images/front/slider_bg_1.jpg") %>')">
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-5 xs-banner-image animInLeft">
+                      <img src="<%= ExcommerceWeb.VariantImage.url({product.master.image, product.master}) %>" alt="">
+                  </div>
+                  <div class="col-md-6 xs-banner-content">
+                      <h2 class="xs-banner-sub-title animInTop"><%= product.ante_title %></h2>
+                      <h3 class="xs-banner-title animInBottom"><%= product.name %></h3>
+                      <p><%= raw product.short_description %></p>
+                      <div class="xs-btn-wraper">
+                          <a href="<%= product_path(@conn, :show, product) %>" class="btn btn-outline-primary animInLeft">LEARN MORE</a>
+                          <a href="#" class="btn btn-primary animInRight">SHOP COLLECTION</a>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+        </div>
+        <% end %>
+    </div>
+</div>
+
+<!-- feature product section -->
 <div class="xs-section-padding xs-feauture-product-section">
     <div class="container">
-
         <div class="xs-heading">
+            <h2 class="xs-heading-sub">Planet Security Collections</h2>
             <h3 class="xs-heading-title">Featured Products</h3>
         </div>
         <div class="row">
-            <%= for {product, index} <- Enum.with_index(@products) do %>
-            <%= if index == 0 do %>
             <div class="col-lg-6">
+              <%= for {product, index} <- Enum.with_index(@products) do %>
+              <%= if index == 0 do %>
                 <div class="xs-feature-product highlight">
                     <%= if product.master.image do %>
-                      <%= tag(:img, src: ExcommerceWeb.VariantImage.url({product.master.image, product.master}), class: "image_featured") %>
+                    <img src="<%= static_path(@conn, "/images/front/image_loader.gif") %>" data-echo="<%= ExcommerceWeb.VariantImage.url({product.master.image, product.master}) %>" class="image_featured" alt="">
                     <% end %>
                     <div class="xs-feature-product-info">
-                        <h4 class="product-title-v2 large"><a href="<%= product_path(@conn, :show, product) %>"><strong><%= product.name %></strong></a></h4>
+                        <h4 class="product-title-v2 large"><a href="<%= product_path(@conn, :show, product) %>"><%= product.ante_title %><strong><%= product.name %></strong></a></h4>
+                        <a href="#" class="btn btn-primary">VIEW COLLECTION</a>
+                    </div>
+                    <div class="xs-product-offer-label">
+                        <span>$<%= product.master.cost_price %></span>
+                        <small>Offer</small>
                     </div>
                 </div>
+              <% end %>
+              <% end %>
             </div>
-            <% else %>
             <div class="col-lg-6 xs-padding-0">
                 <div class="row xs-margin-0">
+                    <%= for {product, index} <- Enum.with_index(@products) do %>
+                    <%= if index != 0 do %>
                     <div class="col-md-6">
                         <div class="xs-feature-product">
                             <%= if product.master.image do %>
-                              <%= tag(:img, src: ExcommerceWeb.VariantImage.url({product.master.image, product.master}), class: "image_t") %>
+                            <img src="<%= static_path(@conn, "/images/front/image_loader.gif") %>" data-echo="<%= ExcommerceWeb.VariantImage.url({product.master.image, product.master}) %>" class="image_t" alt="">
                             <% end %>
                             <div class="xs-feature-product-info">
-                                <h4 class="product-title-v2"><a href="<%= product_path(@conn, :show, product) %>"><strong><%= product.name %></strong></a></h4>
+                                <h4 class="product-title-v2"><a href="<%= product_path(@conn, :show, product) %>"><%= product.ante_title %><strong><%= product.name %></strong></a></h4>
                             </div>
                         </div>
                     </div>
+                    <% end %>
+                    <% end %>
                 </div>
             </div>
-            <% end %>
-            <% end %>
-
         </div>
 
 

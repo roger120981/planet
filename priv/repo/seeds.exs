@@ -20,17 +20,17 @@
 #setting = Setting.changeset(%Setting{theme_id: struct.id, website_title: "Esto es un sitio de ejemplo para Planet Security", website_description: "Planet Security Store"}, %{})
 #{:ok, result} = Repo.insert(setting)
 
-users = [
-  %{email: "yendris81@gmail.com", password: "mssaency", role: "admin"}
-]
+#users = [
+  #%{email: "yendris81@gmail.com", password: "mssaency", role: "admin"}
+#]
 
-for user <- users do
-  {:ok, user} = Excommerce.Accounts.create_user(user)
-   Excommerce.Accounts.confirm_user(user)
-end
+#for user <- users do
+ # {:ok, user} = Excommerce.Accounts.create_user(user)
+  # Excommerce.Accounts.confirm_user(user)
+#end
 
 Seed.LoadCountry.seed!
 Seed.CreateZone.seed!
-Seed.CreateShippingMethod.seed!
-Seed.CreateTax.seed!
-Seed.CreatePaymentMethod.seed!
+#Seed.CreateShippingMethod.seed!
+#Seed.CreateTax.seed!
+#Seed.CreatePaymentMethod.seed!

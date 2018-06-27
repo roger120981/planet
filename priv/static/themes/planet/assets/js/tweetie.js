@@ -19,7 +19,7 @@
             'hideReplies': false,
             'dateFormat': '%b/%d/%Y',
             'template': '{{date}} - {{tweet}}',
-            'apiPath' : 'assets/api/tweet.php',
+            //'apiPath' : 'assets/api/tweet.php',
             'loadingText': 'Loading...'
         }, options);
 

@@ -19,15 +19,35 @@
                         <div class="nav-menus-wrapper">
                             <ul class="nav-menu">
                                 <li class="active"><a href="<%= page_path(@conn, :index) %>">Home</a></li>
-                                <li class=""><a href="<%= page_path(@conn, :index) %>">Pages</a></li>
-                                <li class=""><a href="<%= page_path(@conn, :index) %>">Shop</a></li>
+                                <li class=""><a href="<%= page_path(@conn, :index) %>"><span class="menu-label">NEW</span>Shop</a></li>
                                 <li class=""><a href="<%= page_path(@conn, :index) %>">Blog</a></li>
-                                <li class=""><a href="<%= page_path(@conn, :index) %>">Gallery</a></li>
+                                <li class=""><a href="<%= page_path(@conn, :index) %>"><span class="menu-label highlight">HOT</span>Gallery</a></li>
                             </ul>
                         </div>
                     </nav>
                 </div>
-
+                <div class="col-lg-2 col-sm-5 xs-order-2 xs-wishlist-group">
+                    <div class="xs-wish-list-item">
+                    <span class="xs-wish-list">
+                        <a href="#" class="xs-single-wishList d-none d-md-none d-lg-block">
+                            <span class="xs-item-count">0</span>
+                            <i class="icon icon-heart"></i>
+                        </a>
+                    </span>
+                        <span class="xs-wish-list">
+                        <a href="" class="xs-single-wishList d-none d-md-none d-lg-block">
+                            <span class="xs-item-count">0</span>
+                            <i class="icon icon-arrows"></i>
+                        </a>
+                    </span>
+                        <div class="xs-miniCart-dropdown">
+                            <a href="#" class="xs-single-wishList offset-cart-menu">
+                                <span class="xs-item-count highlight">3</span>
+                                <i class="icon icon-bag"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div><!-- .row END -->
         </div><!-- .container END -->
     </div>    <!-- End nav bar section -->
@@ -79,7 +99,12 @@
                         </div>
                     </form>
                 </div>
-
+                <div class="col-lg-3 d-none d-md-none d-lg-block">
+                    <div style="color: #0063d1;font-size: 1.3em;"><strong>(305) 455-1722</strong></div>
+                    <div style="color: #0063d1;font-size: 1.0em;"><strong>Sales & Solutions</strong></div>
+                    <span style="color: red;font-size: 0.8em">Hablamos español/</span>
+                    <span style="color: #83b735;font-size: 0.8em">Falamos portugues</span>
+                </div>
             </div><!-- .row END -->
         </div><!-- .container END -->
     </div>    <!-- End nav down section -->

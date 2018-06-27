@@ -80,20 +80,23 @@ defmodule ExcommerceWeb.CheckoutManager do
     {:ok, order}
   end
 
-  # Module.register_attribute(__MODULE__, :backable_states, accumulate: true)
+  Module.register_attribute(__MODULE__, :backable_states, accumulate: true)
 
   # for jumping multiple steps
   def back(repo, order, state)
 
-  def back(repo, %Order{state: "address"} = order, state)  when state == "cart" do
+  @backable_states "cart"
+  def back(repo, %Order{state: "address"} = order, state)  when state in @backable_states do
     move_back_to_state(repo, order, state)
   end
 
-  def back(repo, %Order{state: "shipping"} = order, state) when state == "address" do
+  @backable_states "address"
+  def back(repo, %Order{state: "shipping"} = order, state) when state in @backable_states do
     move_back_to_state(repo, order, state)
   end
 
-  def back(repo, %Order{state: "tax"} = order, state) when state == "shipping" do
+  @backable_states "shipping"
+  def back(repo, %Order{state: "tax"} = order, state) when state in @backable_states do
     move_back_to_state(repo, order, state)
   end
 

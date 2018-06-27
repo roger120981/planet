@@ -1529,9 +1529,9 @@ body .xs-promotion ~ .header-transparent {
       align-self: center; }
 
 .xs-banner-content {
-  -ms-flex-item-align: center;
-      align-self: center;
-  text-align: center; }
+  -ms-flex-item-align: justify;
+      align-self: auto;
+  text-align: justify; }
   .xs-banner-content .xs-banner-sub-title {
     font-weight: 300;
     color: #0063d1;
@@ -1555,7 +1555,7 @@ body .xs-promotion ~ .header-transparent {
   .xs-banner-content .xs-btn-wraper {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
-            justify-content: center; }
+            justify-content: justify; }
 
 .xs-banner .xs-banner-content .btn-primary {
   padding: 18px 41px; }

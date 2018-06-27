@@ -19,6 +19,11 @@
       <%= text_input f, :name, class: "form-control title", required: true %>
       <%= error_tag f, :name %>
     </div>
+    <div class="form-group">
+      <%= label f, :ante_title, "Subtitle", class: "control-label" %>
+      <%= text_input f, :ante_title, class: "form-control title" %>
+      <%= error_tag f, :ante_title %>
+    </div>
     <%= if @changeset.data.id do %>
     <div class="form-group">
       <%= label f, :permalink, class: "control-label" %>
